@@ -8,7 +8,7 @@ A quick one for now. I've been digging into a bit of reverse engineering as of l
 
 There's a patch for Tekken Tag Tournament 2 in RPCS3 that caught my attention: "Reduce input lag".
 
-![rpcs3-patches](./2026-05-10-applying-rpcs3-patches-to-ps3-executables/image.png)
+![rpcs3-patches](/assets/images/2026-05-10-applying-rpcs3-patches-to-ps3-executables/image.png)
 
 This patch shaves two frames of input delay off the game in offline modes. You just toggle it on in the emulator and you're done.
 
@@ -38,7 +38,7 @@ I wrote a small Ruby script for the middle bit. Given a decrypted ELF and a patc
 
 This can be re-written into Python if there's demand; I'm more familiar with Ruby so I stuck with it.
 
-I've uploaded the script here: https://github.com/tbender4/ps3_elf_patcher
+I've uploaded the script here: <https://github.com/tbender4/ps3_elf_patcher>
 
 It haven't tested it past Tekken Tag Tournament 2. YMMV.
 
@@ -50,4 +50,4 @@ After the script writes the patched ELF, the result has to be encrypted to run o
 
 This requires a modded PS3. FTP into the PS3, navigate to `/dev_hdd0/game/<TITLEID>/USRDIR/`, back up the existing `EBOOT.BIN`, and drop in the patched copy.
 
-And that's a wrap! Here's a quick video of Practice Mode in PS3 with the input lag option effectively no-oped and second video showing the Skip Auto-Save Warning patch: https://x.com/tbender95/status/2053582940504773034
+And that's a wrap! Here's a quick video of Practice Mode in PS3 with the input lag option effectively no-oped and second video showing the Skip Auto-Save Warning patch: <https://x.com/tbender95/status/2053582940504773034>
