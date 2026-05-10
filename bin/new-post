@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ $# -lt 1 ]]; then
+  echo "Usage: bin/new-post \"Post title\"" >&2
+  exit 1
+fi
+
+title="$*"
+
+# Slugify: lowercase, replace non-alphanumerics with -, trim leading/trailing -
+slug=$(printf '%s' "$title" \
+  | tr '[:upper:]' '[:lower:]' \
+  | sed -E 's/[^a-z0-9]+/-/g; s/^-+|-+$//g')
+
+if [[ -z "$slug" ]]; then
+  echo "Title produced an empty slug." >&2
+  exit 1
+fi
+
+date_part=$(TZ=America/New_York date +%Y-%m-%d)
+front_matter_date=$(TZ=America/New_York date +'%Y-%m-%d %H:%M:%S %z')
+
+file="_posts/${date_part}-${slug}.markdown"
+
+if [[ -e "$file" ]]; then
+  echo "Already exists: $file" >&2
+  exit 1
+fi
+
+mkdir -p _posts
+escaped_title=${title//\"/\\\"}
+
+cat > "$file" <<EOF
+---
+layout: post
+title: "${escaped_title}"
+date: ${front_matter_date}
+---
+
+EOF
+
+echo "$file"
